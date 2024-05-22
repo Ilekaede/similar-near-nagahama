@@ -17,5 +17,5 @@ if not os.path.isdir(output_dir): # 保存先のフォルダが存在しない�
 bing_crawler = BingImageCrawler(storage={"root_dir": output_dir})
 
 print(f"Crawling images for keyword: {keyword} into directory: {output_dir}")
-bing_crawler.crawl(keyword=keyword, max_num=100)
+bing_crawler.crawl(keyword=keyword, max_num=300)
 print("Crawling finished.")

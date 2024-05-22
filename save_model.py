@@ -8,7 +8,7 @@ import os.path
 def get_images_and_labels():
     print('save models start...')
 
-    trainPath = './img/raccoon'
+    trainPath = './img/nagahama'
 
     # Haar-like特徴分類器
     cascadePath = './haarcascade_frontalface_alt.xml' # 正面から見た人の顔のルール
