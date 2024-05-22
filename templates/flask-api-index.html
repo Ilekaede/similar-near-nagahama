@@ -1,8 +1,11 @@
 {% extends "layout.html" %} {% block content %}
 
+<h1>長⚪︎ねる類似度メーカー</h1>
+<p>長⚪︎ねると自分がどれくらい似ているのか，機械が判定してくれます．</p>
+<p>「ファイルを選択」を押して写真を選んで，「結果を見る」を押してね!</p>
 <form action="/result" method="post" enctype="multipart/form-data">
   <input type="file" name="image" accept="image/png, image/jpeg, image/jpg" />
-  <button type="submit">submit</button>
+  <button type="submit">結果を見る</button>
 </form>
 
 {% endblock %}
