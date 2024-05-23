@@ -29,6 +29,10 @@ def result():
 
         # 類似度を出力
         label, predictConfidence = recognizer.predict(image)
+        if predictConfidence > 100:
+            predictConfidence = 0
+        else:
+            predictConfidence = 100 - predictConfidence
         predictConfidence = str(predictConfidence)
         print(predictConfidence)
 
