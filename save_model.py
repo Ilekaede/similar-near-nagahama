@@ -34,9 +34,10 @@ def get_images_and_labels():
             intNumber = re.findall('\d+', f) #'\d'は数字の正規表現
             for number in intNumber:
                 labels.append(int(number))
-
-    recognizer.train(images, np.array(labels)) # カスケード分類機のトレーニング機能
-    recognizer.write('sample-model.yml')
+            saveImagePath = os.path.join('./img/nagahama-face', f'{number}_{x}_{y}_{w}_{h}.jpg')
+            cv2.imwrite(saveImagePath,roi)
+    # recognizer.train(images, np.array(labels)) # カスケード分類機のトレーニング機能
+    # recognizer.write('sample-model.yml')
 
     print('save models complete...')
 
