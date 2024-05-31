@@ -8,9 +8,9 @@ import os.path
 def get_images_and_labels():
     print('save models start...')
 
-    trainPath = './img/nagahama'
+    trainPath = './img/nagahama-face'
 
-    # Haar-like特徴分類器
+    # # Haar-like特徴分類器
     cascadePath = './haarcascade_frontalface_alt.xml' # 正面から見た人の顔のルール
     faceCascade = cv2.CascadeClassifier(cascadePath)
     recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -32,13 +32,17 @@ def get_images_and_labels():
             # 画像の保存処理
             images.append(roi)
             intNumber = re.findall('\d+', f) #'\d'は数字の正規表現
-            for number in intNumber:
-                labels.append(int(number))
-            saveImagePath = os.path.join('./img/nagahama-face', f'{number}_{x}_{y}_{w}_{h}.jpg')
-            cv2.imwrite(saveImagePath,roi)
-    # recognizer.train(images, np.array(labels)) # カスケード分類機のトレーニング機能
-    # recognizer.write('sample-model.yml')
-
-    print('save models complete...')
+            if intNumber:
+                labels.append(int(intNumber[0]))
+            else:
+                print(f"Warning: No label found in filename '{f}'")
+            # saveImagePath = os.path.join('./img/nagahama-face', f'{number}_{x}_s{y}_{w}_{h}.jpg')
+            # cv2.imwrite(saveImagePath,roi)
+    if len(images) == len(labels):
+        recognizer.train(images, np.array(labels)) # カスケード分類機のトレーニング機能
+        recognizer.write('sample-model.yml')
+        print('save models complete...')
+    else:
+        print(f"Error: The number of samples (images) does not match the number of labels. Was len(images)={len(images)}, len(labels)={len(labels)}")
 
 get_images_and_labels()
